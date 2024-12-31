@@ -1,0 +1,24 @@
+#img
+country_flag: https://www.sofascore.com/static/images/flags/al.png
+club_logo: https://api.sofascore.app/api/v1/team/2829/image
+tournament_logo: https://api.sofascore.app/api/v1/unique-tournament/23/image/dark
+player_image: https://api.sofascore.app/api/v1/player/791702/image
+red_card: https://www.sofascore.com/static/images/incidents/icon-red-card.svg
+
+
+#global
+daily: https://www.sofascore.com/api/v1/sport/football/scheduled-events/2024-12-26
+live_list: https://www.sofascore.com/api/v1/sport/football/events/live
+unique_tournaments: https://www.sofascore.com/api/v1/config/default-unique-tournaments/PT
+
+
+#match
+match_info: https://www.sofascore.com/api/v1/event/12499319
+lineups: https://www.sofascore.com/api/v1/event/12499319/lineups
+team_stats: https://www.sofascore.com/api/v1/event/12499319/statistics
+momentum: https://www.sofascore.com/api/v1/event/12499319/graph
+incidents: https://www.sofascore.com/api/v1/event/12499319/incidents
+shots: https://www.sofascore.com/api/v1/event/12499319/shotmap
+standings: https://www.sofascore.com/api/v1/tournament/33/season/63515/standings/total
+form: https://www.sofascore.com/api/v1/event/12499319/pregame-form
+managers: https://www.sofascore.com/api/v1/event/12499319/managers
