@@ -14,7 +14,7 @@ $.ajax({
     	let n = 0;
     	for (i=0; i<Object.keys(data.events).length; i++) {
     		console.log(data.events[i]);
-    		if (data.events[i].startTimestamp >= moment().unix() - (3600*24) && data.events[i].startTimestamp <= todayEndTimestamp && data.events[i].status.description != 'Postponed') {
+    		if (data.events[i].startTimestamp >= moment().unix() - (3600*24) && data.events[i].startTimestamp <= todayEndTimestamp && data.events[i].status.description != 'Postponed' && data.events[i].status.description != 'Abandoned') {
     			let flag;
 	            let status;
 	            let tournament;

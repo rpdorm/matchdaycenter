@@ -71,7 +71,7 @@ a {
 	display: block;
 	overflow: hidden;
 	text-overflow: ellipsis;
-	max-width: 340px;
+	max-width: calc(100% - 120px);
 	height: 36px;
 }
 .home_score, .away_score {
