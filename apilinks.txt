@@ -22,3 +22,12 @@ shots: https://www.sofascore.com/api/v1/event/12499319/shotmap
 standings: https://www.sofascore.com/api/v1/tournament/33/season/63515/standings/total
 form: https://www.sofascore.com/api/v1/event/12499319/pregame-form
 managers: https://www.sofascore.com/api/v1/event/12499319/managers
+
+#competition
+general: https://www.sofascore.com/api/v1/unique-tournament/8
+info: https://www.sofascore.com/api/v1/unique-tournament/8/season/61643/info
+standings: https://www.sofascore.com/api/v1/unique-tournament/8/season/61643/standings/total
+rounds: https://www.sofascore.com/api/v1/unique-tournament/8/season/61643/rounds
+round events: https://www.sofascore.com/api/v1/unique-tournament/8/season/61643/events/round/19
+top players: https://www.sofascore.com/api/v1/unique-tournament/8/season/61643/top-players/overall
+top teams: https://www.sofascore.com/api/v1/unique-tournament/8/season/61643/top-teams/overall
