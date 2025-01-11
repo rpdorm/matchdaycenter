@@ -1,4 +1,4 @@
-let today = moment().format("YYYY-MM-DD");
+let today = moment().format('YYYY-MM-DD');
 let todayStart = moment().format('YYYY-MM-DD 00:00:00');
 let todayStartTimestamp = moment(todayStart).format('X');
 let todayEnd = moment().format('YYYY-MM-DD 23:59:59');
@@ -10,7 +10,7 @@ $.ajax({
     dataType: 'json',
     success: function (data) {
 
-    	$("header").append(`<p>${moment().format("dddd MMMM Do YYYY HH:mm")}</p>`);
+    	$('header').append(`<p>${moment().format('dddd MMMM Do YYYY HH:mm')}</p>`);
     	let n = 0;
     	for (i=0; i<Object.keys(data.events).length; i++) {
     		console.log(data.events[i]);
@@ -27,9 +27,9 @@ $.ajax({
 	            let awayScoreAgg = '';
 	            let liveColor = '';
 	            let round = '';
-	            $(".matches").append(`<div class='match' id='${data.events[i].id}'></div>`);
+	            $('.matches').append(`<div class='match' id='${data.events[i].id}'></div>`);
 	            time = Math.trunc((moment().unix()-data.events[i].time.currentPeriodStartTimestamp)/60);
-	            if (data.events[i].tournament.category.hasOwnProperty("alpha2")) {
+	            if (data.events[i].tournament.category.hasOwnProperty('alpha2')) {
 	                flag = data.events[i].tournament.category.alpha2.toLowerCase();
 	            } else {
 	                flag = data.events[i].tournament.category.flag.toLowerCase();
@@ -41,7 +41,7 @@ $.ajax({
 	            }
 	            else {
 	            	// check for aggregate score
-	            	if (data.events[i].homeScore.hasOwnProperty("aggregated")) {
+	            	if (data.events[i].homeScore.hasOwnProperty('aggregated')) {
 	            		homeScoreAgg = `(${data.events[i].homeScore.aggregated})`;
 	            		awayScoreAgg = `(${data.events[i].awayScore.aggregated})`;
 	            		homeScore = `${data.events[i].homeScore.display} ${homeScoreAgg}`;
@@ -51,46 +51,50 @@ $.ajax({
 		            	homeScore = data.events[i].homeScore.display;
 		            	awayScore = data.events[i].awayScore.display;
 		            }
-	            	if (data.events[i].status.description == "1st half") {
-	            		liveColor = `style="color:#8df268"`;
+	            	if (data.events[i].status.description == '1st half') {
+	            		liveColor = `style='color:#8df268'`;
 		                if (time > 45) {
 		                    status = `45+${time-45}'`;
 		                } else {
 		                    status = `${time}'`;
 		                }
-		            } else if (data.events[i].status.description == "2nd half") {
-		            	liveColor = `style="color:#8df268"`;
+		            } else if (data.events[i].status.description == '2nd half') {
+		            	liveColor = `style='color:#8df268'`;
 		                if (time > 45) {
 		                    status = `90+${time-45}'`;
 		                } else {
 		                    status = `${45+time}'`;
 		                }
-		            } else if (data.events[i].status.description == "Halftime") {
-		                status = "HT";
-		            } else if (data.events[i].status.description == "Ended") {
-		                status = "FT";
-		            } else if (data.events[i].status.description == "Extra time halftime") {
-		                status = "ET HT";
-		            } else if (data.events[i].status.description == "Started") {
-		                status = "";
-		            } else if (data.events[i].status.description == "AP") {
+		            } else if (data.events[i].status.description == 'Halftime') {
+		                status = 'HT';
+		            } else if (data.events[i].status.description == 'Ended') {
+		                status = 'FT';
+		            } else if (data.events[i].status.description == 'Extra time halftime') {
+		                status = 'ET HT';
+		            } else if (data.events[i].status.description == 'Started') {
+		                status = '';
+		            } else if (data.events[i].status.description == 'AP') {
 		                status = data.events[i].status.description;
 		            	homeScore = `${data.events[i].homeScore.display} ${homeScoreAgg} <span class='pen'>${data.events[i].homeScore.penalties}<span class='pen'>`;
 		            	awayScore = `${data.events[i].awayScore.display} ${awayScoreAgg} <span class='pen'>${data.events[i].awayScore.penalties}<span class='pen'>`;
-		            } else if (data.events[i].status.description == "1st extra") {
-		            	liveColor = `style="color:#8df268"`;
+		            } else if (data.events[i].status.description == '1st extra') {
+		            	liveColor = `style='color:#8df268'`;
 		                if (time > 15) {
 		                    status = `105+${time-15}' ET`;
 		                } else {
 		                    status = `${90+time}' ET`;
 		                }
-		            } else if (data.events[i].status.description == "2nd extra") {
-		            	liveColor = `style="color:#8df268"`;
+		            } else if (data.events[i].status.description == '2nd extra') {
+		            	liveColor = `style='color:#8df268'`;
 		                if (time > 15) {
 		                    status = `120+${time-15}' ET`;
 		                } else {
 		                    status = `${105+time}' ET`;
 		                }
+		            } else if (data.events[i].status.description == 'Start delayed') {
+		            	status = 'D';
+						homeScore = '';
+						awayScore = '';
 		            } else {
 		                status = data.events[i].status.description;
 		            }
