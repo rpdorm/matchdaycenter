@@ -9,7 +9,6 @@ $.ajax({
     type: 'GET',
     dataType: 'json',
     success: function (data) {
-
     	$('header').append(`<p>${moment().format('dddd MMMM Do YYYY HH:mm')}</p>`);
     	let n = 0;
     	for (i=0; i<Object.keys(data.events).length; i++) {
@@ -106,7 +105,7 @@ $.ajax({
 	            } else {
 	                tournament = data.events[i].tournament.name;
 	            }
-	            if (data.events[i].roundInfo.hasOwnProperty('name')) {
+	            if (data.events[i].hasOwnProperty('roundInfo') && data.events[i].roundInfo.hasOwnProperty('name')) {
 	                round = `, ${data.events[i].roundInfo.name}`;
 	            }
 
