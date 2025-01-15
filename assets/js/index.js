@@ -32,6 +32,8 @@ $.ajax({
 				let awayScore = '';
 				let homeScoreAgg = '';
 				let awayScoreAgg = '';
+				let homeScorePen = '';
+				let awayScorePen = '';
 				let liveColor = '';
 				let round = '';
 
@@ -54,11 +56,6 @@ $.ajax({
 					homeScore = '';
 					awayScore = '';
 					return 'D';
-					},
-					'AP': () => {
-						homeScore = `${data.events[i].homeScore.display} ${homeScoreAgg} <span class='pen'>${data.events[i].homeScore.penalties}<span class='pen'>`;
-						awayScore = `${data.events[i].awayScore.display} ${awayScoreAgg} <span class='pen'>${data.events[i].awayScore.penalties}<span class='pen'>`;
-					return data.events[i].status.description;
 					}
 				};
 
@@ -93,12 +90,16 @@ $.ajax({
 					homeScore = data.events[i].homeScore?.display !== undefined ? data.events[i].homeScore.display : '0';
 					awayScore = data.events[i].awayScore?.display !== undefined ? data.events[i].awayScore.display : '0';
 
-					// Handle aggregate scores
-					if (data.events[i].homeScore && data.events[i].homeScore.hasOwnProperty('aggregated')) {
-						homeScoreAgg = `(${data.events[i].homeScore.aggregated})`;
-						awayScoreAgg = `(${data.events[i].awayScore.aggregated})`;
-						homeScore += ` ${homeScoreAgg}`;
-						awayScore += ` ${awayScoreAgg}`;
+					// Handle penalties and aggregate scores
+					if (data.events[i].homeScore && data.events[i].homeScore.hasOwnProperty('penalties')) {
+						homeScorePen = data.events[i].homeScore.penalties;
+						awayScorePen = data.events[i].awayScore.penalties;
+						if (data.events[i].homeScore.hasOwnProperty('aggregated')) {
+							homeScoreAgg = `(${data.events[i].homeScore.aggregated})`;
+							awayScoreAgg = `(${data.events[i].awayScore.aggregated})`;
+						}
+						homeScore = `${data.events[i].homeScore.display} <span class='pen'>${data.events[i].homeScore.penalties}<span class='pen'>`;
+						awayScore = `${data.events[i].awayScore.display} <span class='pen'>${data.events[i].awayScore.penalties}<span class='pen'>`;
 					}
 				}
 
@@ -117,14 +118,13 @@ $.ajax({
 						RedCardHome += `<img class='red' src='https://www.sofascore.com/static/images/incidents/icon-red-card.svg'>`;
 					}
 				}
-
 				if (data.events[i].hasOwnProperty('awayRedCards')) {
 					for (let r = 1; r <= data.events[i].awayRedCards; r++) {
 						RedCardAway += `<img class='red' src='https://www.sofascore.com/static/images/incidents/icon-red-card.svg'>`;
 					}
 				}
 
-				console.log(`${data.events[i].tournament.category.name} ${data.events[i].homeTeam.name} ${data.events[i].awayTeam.name}`);
+				console.log(`${data.events[i].id} ${data.events[i].tournament.category.name} ${data.events[i].homeTeam.name} ${data.events[i].awayTeam.name} ${status} ${homeScore}-${awayScore}`);
 				console.log(data.events[i]);
 
 				// Append Data to the Page
