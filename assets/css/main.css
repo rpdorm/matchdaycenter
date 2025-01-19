@@ -51,7 +51,7 @@ a {
 	overflow: hidden;
 	padding-bottom:2%;
 }
-.home_team, .away_team {
+.team {
 	float: left;
 	white-space: nowrap;
 	display: block;
@@ -60,7 +60,8 @@ a {
 	max-width: calc(100% - 120px);
 	height: 36px;
 }
-.home_score, .away_score {
+.score {
+	display:inline-block;
 	float: right;
 }
 .pen {

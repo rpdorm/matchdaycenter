@@ -91,15 +91,13 @@ $.ajax({
 					awayScore = data.events[i].awayScore?.display !== undefined ? data.events[i].awayScore.display : '0';
 
 					// Handle penalties and aggregate scores
+					if (data.events[i].homeScore.hasOwnProperty('aggregated')) {
+						homeScoreAgg = `(${data.events[i].homeScore.aggregated})`;
+						awayScoreAgg = `(${data.events[i].awayScore.aggregated})`;
+					}
 					if (data.events[i].homeScore && data.events[i].homeScore.hasOwnProperty('penalties')) {
 						homeScorePen = data.events[i].homeScore.penalties;
 						awayScorePen = data.events[i].awayScore.penalties;
-						if (data.events[i].homeScore.hasOwnProperty('aggregated')) {
-							homeScoreAgg = `(${data.events[i].homeScore.aggregated})`;
-							awayScoreAgg = `(${data.events[i].awayScore.aggregated})`;
-						}
-						homeScore = `${data.events[i].homeScore.display} <span class='pen'>${data.events[i].homeScore.penalties}<span class='pen'>`;
-						awayScore = `${data.events[i].awayScore.display} <span class='pen'>${data.events[i].awayScore.penalties}<span class='pen'>`;
 					}
 				}
 
@@ -129,15 +127,37 @@ $.ajax({
 
 				// Append Data to the Page
 				$(`.matches > .match#${data.events[i].id}`).append(
-					`<div class='info'><img class='tournament_logo' src='https://www.sofascore.com/static/images/flags/${flag}.png' title='${data.events[i].tournament.category.name}'><p class='tournament'><b>${tournament}${round}</b></p><p class='time' ${liveColor}>${status}</p></div>`
+					`<div class='info'><img class='tournament_logo' src='https://www.sofascore.com/static/images/flags/${flag}.png' title='${data.events[i].tournament.category.name}'>
+						<p class='tournament'><b>${tournament}${round}</b></p><p class='time' ${liveColor}>${status}</p>
+					</div>`
 				);
 
 				$(`.matches > .match#${data.events[i].id}`).append(
-					`<div class='home'><img class='team_logo' src='https://api.sofascore.app/api/v1/team/${data.events[i].homeTeam.id}/image'><p class='home_team' title='${data.events[i].homeTeam.name}'>${data.events[i].homeTeam.shortName}</p>${RedCardHome}<p class='home_score'>${homeScore}</p></div><div class='away'><img class='team_logo' src='https://api.sofascore.app/api/v1/team/${data.events[i].awayTeam.id}/image'><p class='away_team' title='${data.events[i].awayTeam.name}'>${data.events[i].awayTeam.shortName}</p>${RedCardAway}<p class='away_score'>${awayScore}</p></div>`
+					`<div class='home'>
+						<img class='team_logo' src='https://api.sofascore.app/api/v1/team/${data.events[i].homeTeam.id}/image'>
+						<p class='team' title='${data.events[i].homeTeam.name}'>${data.events[i].homeTeam.shortName}</p>${RedCardHome}
+						<div class='score'>
+							<p class='goals'>${homeScore}
+								<span class='agg'>${homeScoreAgg}</span>
+								<span class='pen'>${homeScorePen}</span>
+							</p>
+						</div>
+					</div>
+					<div class='away'><img class='team_logo' src='https://api.sofascore.app/api/v1/team/${data.events[i].awayTeam.id}/image'>
+						<p class='team' title='${data.events[i].awayTeam.name}'>${data.events[i].awayTeam.shortName}</p>${RedCardAway}
+						<div class='score'>
+							<p class='goals'>${awayScore}
+								<span class='agg'>${awayScoreAgg}</span>
+								<span class='pen'>${awayScorePen}</span>
+							</p>
+						</div>
+					</div>`
 				);
 
 				$(`.matches > .match#${data.events[i].id}`).append(
-					`<div class='more'><a href='https://www.sofascore.com/football/match/${data.events[i].slug}/${data.events[i].customId}#id:${data.events[i].id}' target='_blank'>Match Details</a></div>`
+					`<div class='more'>
+						<a href='https://www.sofascore.com/football/match/${data.events[i].slug}/${data.events[i].customId}#id:${data.events[i].id}' target='_blank'>Match Details</a>
+					</div>`
 				);
 			}
 		}
